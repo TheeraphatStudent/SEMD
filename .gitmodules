@@ -1,0 +1,12 @@
+[submodule "semd-backend"]
+	path = semd-backend
+	url = https://github.com/TheeraphatStudent/SEMD-backend.git
+[submodule "semd-extension"]
+	path = semd-extension
+	url = https://github.com/TheeraphatStudent/SEMD-extension.git
+[submodule "semd-frontend"]
+	path = semd-frontend
+	url = https://github.com/TheeraphatStudent/SEMD-frontend.git
+[submodule "semd-ml"]
+	path = semd-ml
+	url = https://github.com/TheeraphatStudent/SEMD-ml.git

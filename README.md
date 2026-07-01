@@ -1,87 +1,93 @@
 # SEMD
 
-an malicious url checker tools integrated with ML
+SEMD is a malicious URL checker integrated with machine learning. This root repository is intended to be used as the entry point for all project modules.
 
-this project was usage python `3.12.3` to development
+## Monorepo Access After Clone
 
-## Project structure overview
-
-```
-SEMD
-├── semd-backend/          # Backend service (Python/FastAPI)
-│   ├── config/             # Configuration files
-│   ├── database/           # Database scripts and migrations
-│   ├── models/             # Data models and schemas
-│   ├── routers/            # API endpoints and routes
-│   ├── services/           # Business logic and utilities
-│   ├── workers/            # Background workers
-│   ├── main.py             # Application entry point
-│   ├── compose.yaml        # Docker compose configuration
-│   └── requirements/       # Dependency files
-│
-├── semd-ml/                # Machine Learning service
-│   ├── src/                # Source code and datasets
-│   ├── models/             # Trained ML models
-│   ├── reports/            # Model evaluation reports
-│   ├── requirements.txt    # Python dependencies
-│   ├── docker-compose.yml  # ML service orchestration
-│   └── Dockerfile          # ML service container
-│
-├── semd-frontend/          # Frontend application (Next.js/React)
-│   ├── src/                # Application source code
-│   ├── public/             # Static assets and images
-│   ├── package.json        # Node.js dependencies
-│   ├── tailwind.config.ts  # Styling configuration
-│   └── next.config.js      # Next.js configuration
-│
-├── semd-extension/         # Browser extension (Chrome/Firefox)
-│   ├── chrome_extension/   # Chrome-specific extension files
-│   ├── firefox_addons/     # Firefox-specific addon files
-│   ├── scripts/            # Build and deployment scripts
-│   ├── package.json        # Extension dependencies
-│   └── extension.conf.yaml # Extension configuration
-│
-└── README.md               # Project documentation
-```
-
-## Service port
-
-- Backend: 3000
-- Frontend: 3001
-- MLflow: 5000
-- Redis: 6379
-- PostgreSQL: 5432
-
-## To usage pyenv
-
-1. List version of python
+Clone the root repository with submodules:
 
 ```bash
-pyenv install -l
+git clone --recurse-submodules https://github.com/TheeraphatStudent/SEMD.git
+cd SEMD
 ```
 
-2. Install specification version
+If you already cloned the root repository and the module folders are empty, run:
+
 ```bash
-pyenv install 3.12
+git submodule update --init --recursive
 ```
 
-3. Enjoy (:
+After entering the root folder, access each project by changing into its module directory:
 
-## Defind network
+```bash
+cd semd-backend     # Backend API
+cd semd-ml          # Machine learning service
+cd semd-frontend    # Web frontend
+cd semd-extension   # Browser extension
+```
+
+Use `cd ..` to return to the root before entering another module. Do not clone another `SEMD` inside a module folder; the module source is provided by the configured submodules.
+
+## Project Structure
+
+```text
+SEMD/
+|-- semd-backend/      # Python/FastAPI backend service
+|-- semd-ml/           # Python machine learning service
+|-- semd-frontend/     # Next.js/React frontend
+|-- semd-extension/    # Chrome/Firefox browser extension
+|-- AGENTS.md          # Contributor and agent guidelines
+`-- README.md          # Root project documentation
+```
+
+## Service Ports
+
+- Backend: `3000`
+- Frontend: `3001`
+- MLflow: `5000`
+- Redis: `6379`
+- PostgreSQL: `5432`
+
+## Python Development With uv
+
+Use Python `3.12.x` and `uv` for Python modules such as `semd-backend` and `semd-ml`.
+
+```bash
+cd semd-backend
+uv python install 3.12
+uv sync
+uv run pytest
+uv run pyformat --in-place **/*.py
+```
+
+Run the same pattern inside `semd-ml` when working on the ML service.
+
+## Frontend and Extension Development
+
+Use Node.js commands inside the frontend or extension module that contains `package.json`.
+
+```bash
+cd semd-frontend
+npm install
+npm run dev
+npm test
+npm run build
+```
+
+For the browser extension, run the package scripts from `semd-extension`.
+
+## Shared Local Network
+
+Create the shared network before running containerized services:
 
 ```bash
 podman network create semd-shared-network
 ```
 
-## For python project
+## Useful Maintenance Commands
 
-```bash
-pyformat --in-place **/*.py
-```
+Kill running SEMD Python processes on Linux:
 
-## Remark
-
-Kill running process on linux
 ```bash
 ps aux | grep semd | grep python | awk '{print $2}' | xargs kill -9
 ```
