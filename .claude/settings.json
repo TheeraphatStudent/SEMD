@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git submodule status*)",
+      "Bash(npm install*)",
+      "Bash(npm run dev*)",
+      "Bash(npm run build*)",
+      "Bash(npm run lint*)",
+      "Bash(npm run generate:api*)",
+      "Bash(npm run build:chrome*)",
+      "Bash(npm run build:firefox*)",
+      "Bash(npm run build:all*)",
+      "Bash(uv sync*)",
+      "Bash(uv run*)",
+      "Bash(uv python install*)",
+      "Bash(podman network create semd-shared-network)",
+      "Bash(podman network ls*)",
+      "Bash(docker compose up*)",
+      "Bash(podman compose up*)",
+      "Bash(docker ps*)",
+      "Bash(podman ps*)",
+      "Bash(docker logs*)",
+      "Bash(podman logs*)",
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(git submodule update*)",
+      "Bash(docker compose down*)",
+      "Bash(podman compose down*)",
+      "Bash(npm run clean*)",
+      "Bash(chown*)",
+      "Edit(semd-backend/database/semd.db.sql)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Edit(**/.env)",
+      "Edit(**/.env.local)",
+      "Bash(rm -rf*)",
+      "Bash(sudo*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)"
+    ]
+  }
+}
